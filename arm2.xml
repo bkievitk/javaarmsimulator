@@ -1,0 +1,198 @@
+# Known object types.
+# <joint> A joint in the robot arm.
+# <root> Name of the root joint in the robot arm.
+# <endEffector> Name of the hand joint in the robot arm.
+# <connect> Define how joints are connected to each other.
+# <noCollision> Define two objects that can not collide.
+
+<joint>
+	<object>
+		<shape>cube</shape>
+		<center>0,0,0</center>
+		<size>.223,.094,.094</size>
+		<color>200,200,200</color>
+		<name>ShoulderPitch</name>
+	</object>
+	<transform>
+		<translate>-.223/2,0,0</translate>
+	</transform>	
+	<centerOfRotationParent>0,0,0</centerOfRotationParent>
+	<centerOfRotationChild>0,0,0</centerOfRotationChild>
+	<rotation>1.14,0,0</rotation>
+	<rotationZero>1.14+PI/2,0,0</rotationZero>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>3.04,0,0</rotationMax>
+    <rotationPositive>---</rotationPositive>
+	<name>ShoulderPitch</name>
+</joint>
+
+<joint>
+	<object>
+		<shape>cube</shape>
+		<center>0,0,0</center>
+		<size>.113,.09,.09</size>
+		<color>200,200,200</color>
+		<name>ShoulderAbduct</name>
+	</object>
+	<transform>
+		<translate>-.113/2,0,0</translate>
+	</transform>	
+	<centerOfRotationParent>.179,0,0</centerOfRotationParent>
+	<centerOfRotationChild>-.05,0,0</centerOfRotationChild>
+	<rotation>0,0,.32</rotation>
+	<rotationZero>0,0,PI/2+.32</rotationZero>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>0,0,2.87</rotationMax>
+	<name>ShoulderAbduct</name>
+</joint>
+			
+<joint>
+	<object>
+		<shape>cylinder</shape>
+		<center>0,0,0</center>
+		<radius>.088/2</radius>
+		<height>.163</height>
+		<divs>10</divs>
+		<color>200,200,200</color>
+		<name>UpperArmRoll</name>
+	</object>
+	<transform>
+		<translate>-.163/2,0,0</translate>
+		<rotateZ>-PI/2</rotateZ>
+	</transform>	
+	<centerOfRotationParent>.113,0,0</centerOfRotationParent>
+	<centerOfRotationChild>0,0,0</centerOfRotationChild>
+	<rotation>0,0,0</rotation>
+	<rotationZero>1.4+PI/2,0,0</rotationZero>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>2.67,0,0</rotationMax>
+    <rotationPositive>---</rotationPositive>	
+	<name>UpperArmRoll</name>
+</joint>
+
+<joint>
+	<object>
+		<shape>cylinder</shape>
+		<center>0,0,0</center>
+		<radius>.088/2</radius>
+		<height>.05</height>
+		<divs>10</divs>
+		<color>200,200,200</color>
+		<name>Elbow</name>
+	</object>
+	<transform>
+		<translate>0,0,0</translate>
+		<rotateX>PI/2</rotateX>
+	</transform>	
+	<centerOfRotationParent>.163+.043,0,0</centerOfRotationParent>
+	<centerOfRotationChild>0,0,0</centerOfRotationChild>
+	<rotation>0,0,1</rotation>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>0,0,2.56</rotationMax>
+    <rotationPositive>---</rotationPositive>	
+	<name>Elbow</name>
+</joint>
+
+<joint>
+	<object>
+		<shape>cube</shape>
+		<center>0,0,0</center>
+		<size>.229,.043,.043</size>
+		<color>200,200,200</color>
+		<name>WristRoll</name>
+	</object>
+	<transform>
+		<translate>-.229/2,0,0</translate>
+	</transform>	
+	<centerOfRotationParent>.048,0,0</centerOfRotationParent>
+	<centerOfRotationChild>0,0,0</centerOfRotationChild>
+	<rotation>3.19,0,0</rotation>
+	<rotationZero>3.19-PI/2,0,0</rotationZero>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>3.19,0,0</rotationMax>
+    <rotationPositive>---</rotationPositive>	
+	<name>WristRoll</name>
+</joint>	
+		
+<joint>
+	<object>
+		<shape>cube</shape>
+		<center>0,0,0</center>
+		<size>.101,.085,.03</size>
+		<color>200,200,200</color>
+		<name>WristFlex</name>
+	</object>
+	<transform>
+		<translate>-.101/2,-.055/2,0</translate>
+	</transform>	
+	<centerOfRotationParent>.229,0,0</centerOfRotationParent>
+	<centerOfRotationChild>0,0,0</centerOfRotationChild>
+	<rotation>0,.42,0</rotation>
+	<rotationZero>0,.42,0</rotationZero>
+	<rotationMin>0,0,0</rotationMin>
+	<rotationMax>0,2.06,0</rotationMax>
+	<name>WristFlex</name>
+</joint>
+
+<root>ShoulderPitch</root>
+<endEffector>WristFlex</endEffector>
+
+<connect>
+	<parent>ShoulderPitch</parent>
+	<child>ShoulderAbduct</child>
+</connect>
+
+<connect>
+	<parent>ShoulderAbduct</parent>
+	<child>UpperArmRoll</child>
+</connect>
+
+<connect>
+	<parent>UpperArmRoll</parent>
+	<child>Elbow</child>
+</connect>
+
+<connect>
+	<parent>Elbow</parent>
+	<child>WristRoll</child>
+</connect>
+
+<connect>
+	<parent>WristRoll</parent>
+	<child>WristFlex</child>
+</connect>
+
+<noCollision>
+	<first>ShoulderPitch</first>
+	<second>ShoulderAbduct</second>
+</noCollision>
+
+<noCollision>
+	<first>ShoulderPitch</first>
+	<second>UpperArmRoll</second>
+</noCollision>
+
+<noCollision>
+	<first>ShoulderAbduct</first>
+	<second>UpperArmRoll</second>
+</noCollision>
+
+<noCollision>
+	<first>UpperArmRoll</first>
+	<second>Elbow</second>
+</noCollision>
+
+<noCollision>
+	<first>Elbow</first>
+	<second>WristRoll</second>
+</noCollision>
+
+<noCollision>
+	<first>UpperArmRoll</first>
+	<second>WristRoll</second>
+</noCollision>
+
+<noCollision>
+	<first>WristRoll</first>
+	<second>WristFlex</second>
+</noCollision>
