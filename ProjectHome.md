@@ -1,0 +1,1 @@
+This tool simulates a robot arm and is designed in Java with no external libraries required.
